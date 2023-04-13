@@ -45,11 +45,7 @@ const checkForColumnOfFour = () => {
 
 }
 
-//#endregion
-
-
-//#region Check For Columns of Three
-  function checkForColumnOfThree() {
+  const checkForColumnOfThree = () => {
 
     for (let i = 0; i < 47; i++) {
 
@@ -67,10 +63,8 @@ const checkForColumnOfFour = () => {
     }
 
   }
- //#endregion
 
- //#region Check for Row of three
-  function checkForRowOfThree() {
+  const checkForRowOfThree = () => {
 
     for (let i = 0; i < 64; i++) {
 
@@ -93,9 +87,6 @@ const checkForColumnOfFour = () => {
 
   }
 
-  //#endregion
-
-  //#region 
 const checkForRowOfFour = () => {
 
   for(let i = 0; i < 64; i++ ){
@@ -142,11 +133,8 @@ const moveIntoSquareBelow = () => {
   }
 }
 
-console.log(scoreDisplay)
-
 const dragStart = (e) => {
   setSquareBeingDragged(e.target)
-
 }
 
 const dragDrop = (e) => {
@@ -197,7 +185,6 @@ const createBoard = () => {
   const randomColorArrangement = []
 
   for(let i = 0; i < width * width; i++){
-    //generating random colors
       const randomColor = candyColors[Math.floor(Math.random() * candyColors.length)]
       randomColorArrangement.push(randomColor)
   }
@@ -214,7 +201,6 @@ useEffect(() => {
 useEffect(() => {
   const timer = setInterval(() => {
 
-    
     checkForColumnOfFour()
     checkForRowOfFour()
     checkForColumnOfThree()
@@ -228,32 +214,30 @@ useEffect(() => {
 
   
 
-},[checkForColumnOfFour, checkForColumnOfThree, checkForRowOfThree, moveIntoSquareBelow, currentColorArrangement])
-
-
+},[checkForColumnOfFour,checkForRowOfFour, checkForColumnOfThree, checkForRowOfThree, moveIntoSquareBelow, currentColorArrangement])
 
   return (
     <div className="app">
-      <div className="game">
-        {currentColorArrangement.map((candyColor, index) => (
+     <div className="game">
+    {currentColorArrangement.map((candyColor, index) => (
 
-          <img
-            key = {index}
-            src={candyColor}
-            alt = {candyColor}
-            data-id = {index}
-            draggable = {true}
-            onDragStart = {dragStart}
-            onDragOver = {(e) => e.preventDefault()}
-            onDragEnter = {(e) => e.preventDefault()}
-            onDragLeave = {(e) => e.preventDefault()}
-            onDrop = {dragDrop}
-            onDragEnd = {dragEnd}
-          />
+      <img
+        key = {index}
+        src={candyColor}
+        alt = {candyColor}
+        data-id = {index}
+        draggable = {true}
+        onDragStart = {dragStart}
+        onDragOver = {(e) => e.preventDefault()}
+        onDragEnter = {(e) => e.preventDefault()}
+        onDragLeave = {(e) => e.preventDefault()}
+        onDrop = {dragDrop}
+        onDragEnd = {dragEnd}
+      />
 
-        ))}
+))}
 
-      </div>
+</div>
       <ScoreBoard score={scoreDisplay} />
     </div>
   )
